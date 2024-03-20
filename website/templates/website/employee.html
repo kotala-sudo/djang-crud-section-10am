@@ -1,0 +1,17 @@
+{% extends 'website/base.html' %}
+{% block title %}Employee Detail{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <div class="card" style="width: 18rem;">
+        <div class="card-body">
+        <h5 class="card-title">{{emp.first_name}} {{emp.last_name}}</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary"><strong>Employee ID: </strong>{{emp.emp_id}}</h6>
+        <p class="card-text"><strong>Email: </strong> {{emp.email}}</p>
+        <p class="card-text"><strong>Date Created on: </strong> {{emp.created_at}}</p>
+        <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+        <a href="{% url 'delete' emp.pk %}" class="btn btn-danger">Delete</a>
+    </div>
+</div>
+    </div>
+{% endblock %}
