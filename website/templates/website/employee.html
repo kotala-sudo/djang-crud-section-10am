@@ -11,6 +11,7 @@
         <p class="card-text"><strong>Date Created on: </strong> {{emp.created_at}}</p>
         <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
         <a href="{% url 'delete' emp.pk %}" class="btn btn-danger">Delete</a>
+        <a href="{% url 'update' emp.pk %}" class="btn btn-primary">Update</a>
     </div>
 </div>
     </div>

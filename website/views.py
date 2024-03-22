@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import Employee
+from .forms import AddEmployeeForm
 
 # Create your views here.
 
@@ -47,3 +48,29 @@ def delete(request, pk):
         messages.success(request, 'You have to be logged in to delete a record')
         return redirect('home') 
 
+def add_employee(request):
+    form = AddEmployeeForm(request.POST or None)
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'A new employee record was successfully added')
+                return redirect('home')
+        return render(request, 'website/add_employee.html', {'form' : form})
+    else:
+        messages.success(request, 'You have to be logged in to create a new employee record')
+        return redirect('home')
+    
+def update_employee(request, pk):
+    current_employee = Employee.objects.get(pk=pk)
+    form = AddEmployeeForm(request.POST or None, instance=current_employee)
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Employee record was successfully updated')
+                return redirect('home')
+        return render(request, 'website/update_employee.html', {'form' : form})
+    else:
+        messages.success(request, 'You have to be logged in to update an employee record')
+        return redirect('home')

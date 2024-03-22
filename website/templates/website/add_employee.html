@@ -1,0 +1,17 @@
+{% extends 'website/base.html' %}
+
+{% block title %}Add Employee {% endblock %}
+
+{% block content %}
+    <div class="container mt-3 p-3 border rounded-3 w-50 ">
+        <h1>Add Employee</h1>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div>
+                {{form.as_p}}
+            </div>
+            <button type="submit" class="btn btn-secondary">Add Employee</button>
+        </form>
+    </div>
+
+{% endblock %}
